@@ -1,18 +1,18 @@
-from dfa import ascii_alphabet, dfa_to_csv, nfa_to_dfa
-from minimizer import minimize_dfa, reachable_states
-from nfa import combine_nfas
-from parser import parse_regular
+from .dfa import ascii_alphabet, dfa_to_csv, nfa_to_dfa
+from .minimizer import minimize_dfa, reachable_states
+from .nfa import combine_nfas
+from .parser import parse_regular
 
 tokens = [
     (
         "KEYWORD",
-        "function|returns|uses|while|if|else|assert|assume|invariant|length|true|false",
+        "function|returns|requires|ensures|uses|while|if|else|assert|assume|invariant|length|true|false|int|not|and|or|forall|exists",
     ),
     ("IDENT", "[A-Za-z_][A-Za-z0-9_]*"),
     ("INT", "0|[1-9][0-9]*"),
     ("WS", "[ \\t\\r\\n]+"),
     ("COMMENT", "//[^\\n]*"),
-    ("OP", "\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\+|-|\\*|/|==|!=|<=|>=|<|>|=|:"),
+    ("OP", "\\(|\\)|\\[|\\]|\\{|\\}|,|;|\\+|-|\\*|/|==|!=|<=|>=|<|>|=|:|->|=>|\\|"),
 ]
 
 print("Tokens:")

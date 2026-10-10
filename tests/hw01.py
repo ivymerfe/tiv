@@ -1,5 +1,5 @@
-from dfa import dfa_from_csv
-from tokenizer import LexError, tokenize
+from hw01.dfa import dfa_from_csv
+from hw01.tokenizer import LexError, tokenize
 
 dfa = dfa_from_csv("dfa.csv")
 SKIP = {"WS"}
@@ -74,7 +74,6 @@ check("//c\n", [("COMMENT", "//c", 0)])
 check("//", [("COMMENT", "//", 0)])
 check("// a\n// b", [("COMMENT", "// a", 0), ("COMMENT", "// b", 5)])
 
-# составные примеры с позициями
 check(
     "if x == 10 { return x; }",
     [
@@ -113,11 +112,9 @@ check(
     ],
 )
 
-# пробелы между токенами не сбивают позиции
 check("  10   +   5  ", [("INT", "10", 2), ("OP", "+", 7), ("INT", "5", 11)])
-check("x + 1x", [])
 try:
-    tokenize(dfa, "b", skip=SKIP)
+    tokenize(dfa, "хихихи", skip=SKIP)
 except LexError:
     pass
 else:

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from parser import Alt, CharClass, Concat, Literal, Plus, RegNode, Star
+from .parser import Alt, CharClass, Concat, Literal, Plus, RegNode, Star
 
 
 @dataclass

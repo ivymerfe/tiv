@@ -1,4 +1,4 @@
-from dfa import DFA
+from .dfa import DFA
 
 
 class LexError(Exception):
@@ -8,7 +8,7 @@ class LexError(Exception):
         self.char = char
 
 
-def tokenize(dfa: DFA, text: str, skip: set[str] = frozenset()) -> list[tuple[str, str, int]]:
+def tokenize(dfa: DFA, text: str, skip: set[str]) -> list[tuple[str, str, int]]:
     tokens = []
     pos = 0
     n = len(text)

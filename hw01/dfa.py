@@ -1,7 +1,7 @@
 import csv
 from dataclasses import dataclass, field
 
-from nfa import NFA
+from .nfa import NFA
 
 
 def symbol_matches(symbol, char):

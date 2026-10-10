@@ -81,7 +81,7 @@ class RegexParser:
             return self.text[self.pos]
         return None
 
-    def consume(self) -> str:
+    def consume(self) -> str | None:
         ch = self.peek()
         self.pos += 1
         return ch

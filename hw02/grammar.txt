@@ -1,0 +1,38 @@
+module      = { function | formula } ;
+function    = IDENT "(" [ varDef {"," varDef} ] ")"
+              [ "requires" predicate ]
+              "returns" varDef {"," varDef}
+              [ "ensures" predicate ]
+              [ "uses" localDef {"," localDef} ]
+              statement ;
+formula     = IDENT "(" [ varDef {"," varDef} ] ")" "=>" predicate ;
+varDef      = IDENT ":" type ;
+localDef    = IDENT [ ":" type ] ;
+type        = "int" { "[" "]" } ;
+
+statement   = block | ifStmt | whileStmt | assertStmt | assumeStmt | assignment ;
+block       = "{" { statement } "}" ;
+ifStmt      = "if" "(" predicate ")" statement [ "else" statement ] ;
+whileStmt   = "while" "(" predicate ")" [ "invariant" predicate ] statement ;
+assertStmt  = "assert" predicate ";" ;
+assumeStmt  = "assume" predicate ";" ;
+assignment  = IDENT { "[" expr "]" } "=" expr ";"
+            | IDENT { "," IDENT } "=" call ";" ;
+
+expr        = term { ("+" | "-") term } ;
+term        = unary { ("*" | "/") unary } ;
+unary       = "-" unary | postfix ;
+postfix     = primary { "[" expr "]" } ;
+primary     = INT | call | IDENT | "(" expr ")" ;
+call        = (IDENT | "length") "(" [ expr {"," expr} ] ")" ;
+
+predicate   = disj [ "->" predicate ] ;
+disj        = conj { "or" conj } ;
+conj        = neg { "and" neg } ;
+neg         = "not" neg | patom ;
+patom       = "true" | "false"
+            | ("forall" | "exists") "(" varDef "|" predicate ")"
+            | expr cmpOp expr
+            | call
+            | "(" predicate ")" ;
+cmpOp       = "==" | "!=" | "<" | ">" | "<=" | ">=" ;
