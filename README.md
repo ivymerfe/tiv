@@ -23,9 +23,9 @@ python3 -m hw03.main sample.funny --json
 ## Тесты
 
 ```sh
-python3 -m tests.hw01
-python3 -m tests.hw02
-python3 -m tests.hw03
+python3 -m tests.hw01 # tokenizer
+python3 -m tests.hw02 # parser
+python3 -m tests.hw03 # type checker
 ```
 
 ## Приоритеты и ассоциативность
@@ -44,3 +44,7 @@ python3 -m tests.hw03
   применяются на следующем этапе.
 - Слово `function` лексер знает, но грамматика Funny его не использует, парсер его не принимает.
 - Пустой ввод считается ошибкой.
+
+## Ограничения type checker
+- Временные _tN от десугаринга объявляются неявно.
+- Семантика не запускается при синтаксических ошибках.

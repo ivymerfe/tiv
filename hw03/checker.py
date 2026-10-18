@@ -1,8 +1,19 @@
+from hw02.parser import parse
 
 def format_error(text, pos, msg):
     line = text.count("\n", 0, pos) + 1
     col = pos - (text.rfind("\n", 0, pos) + 1) + 1
     return f"{line}:{col}: {msg}"
+
+
+def analyze(text, dfa):
+    ast, errs = parse(text, dfa)
+    if ast is None or errs:
+        return (ast.to_dict() if ast is not None else None), list(errs)
+    c = Checker()
+    c.check(ast)
+    return ast.to_dict(), sorted(set(c.errors))
+
 
 class Checker:
     def __init__(self):
@@ -68,7 +79,9 @@ class Checker:
         self.stmt(f["body"])
         for l in f["locals"]:
             name = l.fields["name"]
-            if self.scope.get(name) is None:
+            t = self.scope.get(name)
+            l.fields["ty"] = t
+            if t is None:
                 self.err(l.pos, f"cannot infer type of local variable {name!r}")
         f["ty"] = {
             "params": ptypes,
