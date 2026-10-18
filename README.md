@@ -13,11 +13,19 @@ python3 -m hw02.main sample.funny
 python3 -m hw02.main sample.funny --json
 ```
 
+## Проверка типов
+
+```sh
+python3 -m hw03.main sample.funny
+python3 -m hw03.main sample.funny --json
+```
+
 ## Тесты
 
 ```sh
 python3 -m tests.hw01
 python3 -m tests.hw02
+python3 -m tests.hw03
 ```
 
 ## Приоритеты и ассоциативность
