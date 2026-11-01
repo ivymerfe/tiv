@@ -200,6 +200,7 @@ class Gen:
         self.start(t)
         self.stmt(f["then"])
         if has_else:
+            self.emit(Instr("jmp", aux=[end]))
             self.start(e)
             self.stmt(f["else_"])
         self.start(end)

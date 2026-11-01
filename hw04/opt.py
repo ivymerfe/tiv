@@ -83,10 +83,6 @@ def algebra(fn):
                     r = a
                 elif a == 0:
                     r = c
-                elif c == 2 and isinstance(a, str):
-                    i.args = [a, a]
-                elif a == 2 and isinstance(c, str):
-                    i.args = [c, c]
             elif o == "sub":
                 if c == 0:
                     r = a
