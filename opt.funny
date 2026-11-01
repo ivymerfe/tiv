@@ -1,0 +1,23 @@
+opt(a: int, b: int)
+  returns r: int
+  uses x: int, y: int, t: int, u: int
+{
+  x = 4 * 5 + 2;
+  y = x - 22;
+  t = a * 1 + 0;
+  u = b * 7 + a;
+  if (x > 10) {
+    y = 3 * 0 + 8 / 2 - 4;
+    r = (a + b) * (a + b) + t;
+    r = r + y * a;
+  } else
+    r = u;
+  r = r + a * 2;
+}
+
+graph(a: int, b: int, c: int, d: int)
+  returns r: int, s: int
+{
+  r = (a + b) * ((c + d) * ((a - c) * ((b - d) + a * d)));
+  s = (a * b + c * d) * (a * c + b * d) - (a * d + b * c) * (a - b + c - d);
+}
