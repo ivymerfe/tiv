@@ -12,6 +12,7 @@ ARITH = {"add", "sub", "mul", "div"}
 COMM = {"add", "mul", "eq", "ne"}
 EXPR = {"neg", "load", "len"} | ARITH | set(CMPS)
 PURE = (EXPR | {"mov"}) - {"load"}
+MAX_ROUNDS = 20
 
 
 def idiv(a, b):
@@ -151,7 +152,7 @@ def dce(fn):
 
 
 def optimize(fn, passes):
-    for _ in range(20):
+    for _ in range(MAX_ROUNDS):
         s = fmt_func(fn)
         if "cprop" in passes:
             cprop(fn)
