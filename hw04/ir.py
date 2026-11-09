@@ -39,6 +39,9 @@ class Func:
         self.rets = rets
         self.blocks = []
 
+    def instr_count(self):
+        return sum(len(block.instrs) for block in self.blocks)
+
 
 def fmt_instr(i):
     o = i.op

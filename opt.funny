@@ -12,12 +12,11 @@ opt(a: int, b: int)
     r = r + y * a;
   } else
     r = u;
-  r = r + a * 2;
-}
+  
 
-graph(a: int, b: int, c: int, d: int)
-  returns r: int, s: int
-{
-  r = (a + b) * ((c + d) * ((a - c) * ((b - d) + a * d)));
-  s = (a * b + c * d) * (a * c + b * d) - (a * d + b * c) * (a - b + c - d);
+  while (x < -100) {
+    x = x - 1;
+  }
+  r = r + a * 2;
+  r = 0;
 }

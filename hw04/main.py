@@ -36,8 +36,11 @@ if errs or ast is None:
     sys.exit(1)
 
 funcs = gen_module(ast)
+instr_before = 0
 for f in funcs:
+    instr_before += f.instr_count()
     build_cfg(f)
+
 before = [fmt_func(f) for f in funcs]
 
 passes = set()
@@ -51,13 +54,19 @@ if not a.o0:
     if a.cse:
         passes.add("cse")
 
+
+instr_after = 0
 for f in funcs:
     optimize(f, passes)
+    instr_after += f.instr_count()
 
 print("# IR before")
 print("\n\n".join(before))
+
+
 print(f"\n# IR after (passes: {', '.join(sorted(passes)) or 'none'})")
 print("\n\n".join(fmt_func(f) for f in funcs))
+
 
 graphs = [(f.name, interference(f, a.ig_all)) for f in funcs]
 colors = [color(g) for _, g in graphs]
@@ -75,3 +84,7 @@ if a.ig_dot:
     items = [(n, g, c) for (n, g), c in zip(graphs, colors)]
     with open(a.ig_dot, "w", encoding="utf-8") as fh:
         fh.write(ig_dot_all(items) + "\n")
+
+
+print(f"Instructions before: {instr_before}")
+print(f"Instructions after: {instr_after}")
